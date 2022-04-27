@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <label v-bind:title="titulo" v-bind:data-hola="titulo" >Hola Mundo</label>
+        <hr>
+        <button v-on:click="monstrarImagen('https://desarrolloweb.com/storage/tag_images/actual/n20BWPxy4WXVZyC94Cvn2pPus1LSIo2drcqniEkJ.png')">Imagen JS</button>
+        <button v-on:click="monstrarImagen('https://desarrolloweb.com/storage/tag_images/actual/sT1RLpDHzInATuKnDUkwXhKoaIOrtS97gBtgiQ6M.png')">Imagen CSS</button>
+        <hr>
+        <img  v-bind:src="imagen" alt="">
+    </div>
+
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    titulo: 'Este es un titulo dinamico',
+                    imagen: 'https://desarrolloweb.com/storage/tag_images/actual/n20BWPxy4WXVZyC94Cvn2pPus1LSIo2drcqniEkJ.png'
+                }
+            },
+            methods:{
+                monstrarImagen(imagen){
+                    this.imagen = imagen;
+                }
+            }
+        }
+        var mountedApp = Vue.createApp(app).mount('#app');
+    </script>
+</body>
+
+</html>
