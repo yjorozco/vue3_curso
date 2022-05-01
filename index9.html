@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+
+<body>
+    <div id="app">
+        <button class="btn indigo darken-4" @click="(contador++)">Haz click</button>
+        {{contador}}
+        <button class="btn indigo darken-4" @mouseout="estado = false" @mouseover="estado = true">Coloca el puntero sobre mi</button>
+        Estado mouse: {{estado}}
+        <select v-on:change="cambiarImagen" class="browser-default">
+            <option value="https://www.solucionex.com/sites/default/files/posts/imagen/css_blog.png">CSS</option>
+            <option value="https://cdn.icon-icons.com/icons2/2415/PNG/512/javascript_original_logo_icon_146455.png">JS</option>
+        </select>
+        <img :src="image" >
+
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <script>
+        const app = {
+            data() {
+                return {
+                    contador:0,
+                    estado: false,
+                    image:""
+                }
+
+            },
+            methods: {
+                cambiarImagen() {
+                    this.image =  event.target.value;
+                    console.log(event.target.value);
+                }
+            },
+
+
+        }
+        var mountedApp = Vue.createApp(app).mount('#app');
+    </script>
+</body>
+
+</html>

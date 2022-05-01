@@ -9,39 +9,24 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-
 </head>
 
 <body>
     <div id="app">
-        <div class="container">
-            <table class="table stripped bordered">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Usuario</th>
-                        <th>Correo</th>
-                        <th>Direccion</th>
-                    </tr>
-                </thead>
+        <input type="text" :disabled="(usuarios == 5)">
+        <label for="">
+            <input type="checkbox" :checked="chChecked"><span></span>
+        </label>
 
-                <tbody>
-                    <tr v-for="usuario in usuarios" v-bind:id="usuario.id">
-                        <td>{{usuario.name}}</td>
-                        <td>{{usuario.username}}</td>
-                        <td>{{usuario.email}}</td>
-                        <td>
-                            <ul>
-                                <li>Ciudad:  {{usuario.address.city}}</li>
-                                <li>Calle:  {{usuario.address.street}}</li>
-                                <li>ZIP:  {{usuario.address.zipcode}}</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
+        <form action="POST">
+            <input type="text" :required="obligatorio">
+            <input type="submit">Enviar</input>
+        </form>
 
-            </table>
-        </div>
+        <select v-model="idFruta" class="browser-default">
+            <option v-for="fruta in frutas" v-bind:value="fruta.id" :selected="fruta.selected">{{fruta.id}}-{{fruta.nombre}}</option>
+        </select>
+       
     </div>
 
     <!-- Compiled and minified JavaScript -->
@@ -52,28 +37,23 @@
         const app = {
             data() {
                 return {
-                    usuarios: [],
-                    posts: []
+                    txtdisabled:false,
+                    usuarios:5,
+                    chChecked: true,
+                    obligatorio:true,
+                    frutas:[
+                        {id:1, nombre:"manzana", selected:false},
+                        {id:2, nombre:"pera", selected:true},
+                        {id:3, nombre:"sandia", selected:false}
+                    ],
+                    idFruta:3
                 }
 
             },
             methods: {
-                getUsuarios() {
-                    fetch('https://jsonplaceholder.typicode.com/users')
-                        .then(response => response.json())
-                        .then(data => this.usuarios = data)
-                },
-                getPosts() {
-                    fetch('https://jsonplaceholder.typicode.com/posts')
-                        .then(response => response.json())
-                        .then(data => this.posts = data)
-                },
 
             },
-            mounted() {
-                this.getUsuarios();
-                this.getPosts();
-            },
+
 
         }
         var mountedApp = Vue.createApp(app).mount('#app');
