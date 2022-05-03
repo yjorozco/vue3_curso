@@ -8,53 +8,66 @@
     <title>Document</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
 </head>
 
 <body>
     <div id="app">
-        <input type="text" :disabled="(usuarios == 5)">
-        <label for="">
-            <input type="checkbox" :checked="chChecked"><span></span>
-        </label>
-
-        <form action="POST">
-            <input type="text" :required="obligatorio">
-            <input type="submit">Enviar</input>
-        </form>
-
-        <select v-model="idFruta" class="browser-default">
-            <option v-for="fruta in frutas" v-bind:value="fruta.id" :selected="fruta.selected">{{fruta.id}}-{{fruta.nombre}}</option>
-        </select>
-       
+        <div class="contaniner" style="padding-top:50px">
+            <input type="text" v-model="n1">
+            <input type="text" v-model="n2">
+            <h5>La suma es {{resultado}}</h5>
+            <br>
+            <div class="row">
+                <label>Escriba una fruta</label>
+                <input type="text" v-model="fruta">
+                <label>Ha agregando un total de {{total_frutas}} frutas</label>
+                <label>Ha agregando un total de {{totalFrutas}} frutas</label>
+                <button type="button" @click="agregarFruta">Agregar</button>
+                <br>
+                <ul>
+                    <li v-for="fruta in frutas">
+                        {{fruta}}
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://unpkg.com/vue@3"></script>
 
     <script>
         const app = {
             data() {
                 return {
-                    txtdisabled:false,
-                    usuarios:5,
-                    chChecked: true,
-                    obligatorio:true,
-                    frutas:[
-                        {id:1, nombre:"manzana", selected:false},
-                        {id:2, nombre:"pera", selected:true},
-                        {id:3, nombre:"sandia", selected:false}
-                    ],
-                    idFruta:3
+                    n1: 0,
+                    n2: 0,
+                    fruta: '',
+                    frutas: [],
+                    totalFrutas:0
                 }
 
             },
             methods: {
+                agregarFruta: function () {
+                    this.frutas.push(this.fruta);
+                    this.fruta = '';
+                    this.calcularFrutas();
+                },
+                calcularFrutas: function(){
+                    this.totalFrutas =  this.frutas.length;
+                }
 
             },
-
-
+            computed: {
+                resultado: function () {
+                    return parseFloat(this.n1) + parseFloat(this.n2);
+                },
+                total_frutas: function () {
+                    return this.frutas.length;
+                }
+            }
         }
         var mountedApp = Vue.createApp(app).mount('#app');
     </script>

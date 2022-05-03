@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" :disabled="(usuarios == 5)">
+        <label for="">
+            <input type="checkbox" :checked="chChecked"><span></span>
+        </label>
+
+        <form action="POST">
+            <input type="text" :required="obligatorio">
+            <input type="submit">Enviar</input>
+        </form>
+
+        <select v-model="idFruta" class="browser-default">
+            <option v-for="fruta in frutas" v-bind:value="fruta.id" :selected="fruta.selected">{{fruta.id}}-{{fruta.nombre}}</option>
+        </select>
+       
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <script>
+        const app = {
+            data() {
+                return {
+                    txtdisabled:false,
+                    usuarios:5,
+                    chChecked: true,
+                    obligatorio:true,
+                    frutas:[
+                        {id:1, nombre:"manzana", selected:false},
+                        {id:2, nombre:"pera", selected:true},
+                        {id:3, nombre:"sandia", selected:false}
+                    ],
+                    idFruta:3
+                }
+
+            },
+            methods: {
+
+            },
+
+
+        }
+        var mountedApp = Vue.createApp(app).mount('#app');
+    </script>
+</body>
+
+</html>
